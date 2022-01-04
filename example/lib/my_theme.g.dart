@@ -59,3 +59,11 @@ class $MyTheme extends InheritedWidget {
   bool updateShouldNotify(covariant InheritedWidget oldWidget) =>
       oldWidget != this;
 }
+
+// **************************************************************************
+// ExtendedThemeDataGenerator
+// **************************************************************************
+
+// _PlayerColorsData
+
+// _MessageColorsData
