@@ -8,7 +8,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,12 +15,28 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      builder: (context, child) => MyTheme(
+      builder: MyTheme.builder(
         light: MyThemeData(),
         dark: MyThemeData(),
-        child: child ?? ErrorWidget('Child required!'),
       ),
-      home: const Scaffold(),
+      home: const Content(),
+    );
+  }
+}
+
+class Content extends StatelessWidget {
+  const Content({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Container(
+          width: 200,
+          height: 200,
+          color: MyTheme.of(context).themeData.primaryColor,
+        ),
+      ),
     );
   }
 }

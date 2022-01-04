@@ -50,6 +50,23 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
       }
     ''');
 
+    // Convenient method
+    themeBuilder.writeln(
+        'static $dataClassName of(BuildContext context) => context.dependOnInheritedWidgetOfExactType<$inheritedWidgetName>()!.data;');
+
+    // Builder method
+    themeBuilder.writeln('''
+      static Widget Function(BuildContext, Widget?) builder({
+        required $dataClassName light,
+        $dataClassName? dark,
+      }) =>
+        (context, child) => $className(
+              light: light,
+              dark: dark,
+              child: child ?? ErrorWidget('Child required'),
+            );
+    ''');
+
     themeBuilder.writeln('}'); // close theme class
 
     //## DATA CLASS ##//

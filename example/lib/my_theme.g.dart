@@ -28,6 +28,18 @@ class MyTheme extends StatelessWidget {
       ),
     );
   }
+
+  static MyThemeData of(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<$MyTheme>()!.data;
+  static Widget Function(BuildContext, Widget?) builder({
+    required MyThemeData light,
+    MyThemeData? dark,
+  }) =>
+      (context, child) => MyTheme(
+            light: light,
+            dark: dark,
+            child: child ?? ErrorWidget('Child required'),
+          );
 }
 
 class MyThemeData {
