@@ -64,6 +64,13 @@ class $MyTheme extends InheritedWidget {
 // ExtendedThemeDataGenerator
 // **************************************************************************
 
-// _PlayerColorsData
+class PlayerColorsData {
+  final Color player1;
+  final Color player2;
+}
 
-// _MessageColorsData
+class MessageColorsData {
+  final Color? warning;
+  final Color? success;
+  final Color? danger;
+}
