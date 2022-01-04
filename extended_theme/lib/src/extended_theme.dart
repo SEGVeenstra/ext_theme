@@ -1,0 +1,3 @@
+class ExtendedTheme {
+  const ExtendedTheme();
+}
