@@ -67,10 +67,19 @@ class $MyTheme extends InheritedWidget {
 class PlayerColorsData {
   final Color player1;
   final Color player2;
+  const PlayerColorsData({
+    required this.player1,
+    required this.player2,
+  });
 }
 
 class MessageColorsData {
   final Color? warning;
   final Color? success;
   final Color? danger;
+  const MessageColorsData({
+    this.warning,
+    this.success,
+    this.danger,
+  });
 }

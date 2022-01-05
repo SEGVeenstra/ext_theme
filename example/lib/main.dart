@@ -40,3 +40,18 @@ class Content extends StatelessWidget {
     );
   }
 }
+
+final myTheme = MyThemeData(
+  themeData: ThemeData.light().copyWith(),
+  playerColors: PlayerColorsData(
+    // Custom property
+    player1: Colors.blue,
+    player2: Colors.red,
+  ),
+  messageColors: MessageColorsData(
+    // Custom propery
+    warning: Colors.yellow,
+    error: Colors.red,
+    succes: Colors.green,
+  ),
+);

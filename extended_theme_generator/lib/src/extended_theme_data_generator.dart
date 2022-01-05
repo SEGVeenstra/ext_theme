@@ -5,11 +5,9 @@ import 'package:build/build.dart';
 import 'package:extended_theme/extended_theme.dart';
 import 'package:source_gen/source_gen.dart';
 
-class ExtendedThemeDataGenerator
-    extends GeneratorForAnnotation<ExtendedThemeData> {
+class ExtendedThemeDataGenerator extends GeneratorForAnnotation<ExtendedThemeData> {
   @override
-  generateForAnnotatedElement(
-      Element element, ConstantReader annotation, BuildStep buildStep) {
+  generateForAnnotatedElement(Element element, ConstantReader annotation, BuildStep buildStep) {
     return _generateThemeData(element, annotation);
   }
 
@@ -26,6 +24,13 @@ class ExtendedThemeDataGenerator
     visitor.fields.forEach((key, value) {
       dataBuffer.writeln('final $value $key;');
     });
+
+    dataBuffer.writeln('const $className({');
+    visitor.fields.forEach((key, value) {
+      final requiredPrefix = value.toString().endsWith('?') ? '' : 'required';
+      dataBuffer.writeln('$requiredPrefix this.$key,');
+    });
+    dataBuffer.writeln('});');
 
     dataBuffer.writeln('}');
 
@@ -45,6 +50,5 @@ class ExtendedThemeDataVisitor extends SimpleElementVisitor {
   @override
   visitFieldElement(FieldElement element) {
     fields[element.name] = element.type;
-    // TODO: add values
   }
 }
