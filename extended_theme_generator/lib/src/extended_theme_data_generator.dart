@@ -17,8 +17,8 @@ class ExtendedThemeDataGenerator extends GeneratorForAnnotation<ExtendedThemeDat
     final visitor = ExtendedThemeDataVisitor();
     element.visitChildren(visitor);
 
-    final newClassName = visitor.dartType.className;
-    final originalClassName = '_$newClassName';
+    final newClassName = visitor.dartType.className.endWithData;
+    final originalClassName = visitor.dartType.getDisplayString(withNullability: true);
 
     final dataBuffer = StringBuffer();
 

@@ -18,7 +18,7 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
     element.visitChildren(visitor);
 
     final className = visitor.dartType.className;
-    final dataClassName = '${className}Data';
+    final dataClassName = className.endWithData;
     final inheritedWidgetName = '\$$className';
 
     final themeBuilder = StringBuffer();
@@ -77,7 +77,13 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
     // fields
     themeBuilder.writeln('final ThemeData themeData;');
     visitor.fields.forEach((key, value) {
-      final fieldType = value.getDisplayString(withNullability: true).withoutLeadingUnderscore;
+      final typeName = value.getDisplayString(withNullability: true);
+      final String fieldType;
+      if (typeName.hasLeadingUnderscore) {
+        fieldType = typeName.withoutLeadingUnderscore.endWithData;
+      } else {
+        fieldType = typeName.withoutLeadingUnderscore;
+      }
       themeBuilder.writeln('final $fieldType $key;');
     });
 

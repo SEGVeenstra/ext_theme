@@ -44,14 +44,12 @@ class MyTheme extends StatelessWidget {
 
 class MyThemeData {
   final ThemeData themeData;
-  final PlayerColorsData playerColors;
-  final MessageColorsData? messageColors;
-  final Color? gameBackgroundColor;
+  final CustomWidgetData customWidget;
+  final SpacesData spaces;
   MyThemeData({
     ThemeData? themeData,
-    required this.playerColors,
-    this.messageColors,
-    this.gameBackgroundColor,
+    required this.customWidget,
+    required this.spaces,
   }) : themeData = themeData ?? ThemeData();
 }
 
@@ -72,31 +70,37 @@ class $MyTheme extends InheritedWidget {
 // ExtendedThemeDataGenerator
 // **************************************************************************
 
-class PlayerColorsData {
-  final _defaults = _PlayerColorsData();
-  late final Color? player1;
-  late final Color? player2;
-  PlayerColorsData({
-    Color? player1,
-    Color? player2,
+class CustomWidgetData {
+  final _defaults = _CustomWidget();
+  late final double width;
+  late final double height;
+  late final BoxShape shape;
+  late final Color? backgroundColor;
+  CustomWidgetData({
+    double? width,
+    double? height,
+    BoxShape? shape,
+    Color? backgroundColor,
   }) {
-    this.player1 = player1 ?? _defaults.player1;
-    this.player2 = player2 ?? _defaults.player2;
+    this.width = width ?? _defaults.width;
+    this.height = height ?? _defaults.height;
+    this.shape = shape ?? _defaults.shape;
+    this.backgroundColor = backgroundColor ?? _defaults.backgroundColor;
   }
 }
 
-class MessageColorsData {
-  final _defaults = _MessageColorsData();
-  late final Color warning;
-  late final Color? success;
-  late final Color? danger;
-  MessageColorsData({
-    Color? warning,
-    Color? success,
-    Color? danger,
+class SpacesData {
+  final _defaults = _Spaces();
+  late final double small;
+  late final double medium;
+  late final double large;
+  SpacesData({
+    double? small,
+    double? medium,
+    double? large,
   }) {
-    this.warning = warning ?? _defaults.warning;
-    this.success = success ?? _defaults.success;
-    this.danger = danger ?? _defaults.danger;
+    this.small = small ?? _defaults.small;
+    this.medium = medium ?? _defaults.medium;
+    this.large = large ?? _defaults.large;
   }
 }
