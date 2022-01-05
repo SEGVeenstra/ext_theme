@@ -17,24 +17,32 @@ class ExtendedThemeDataGenerator extends GeneratorForAnnotation<ExtendedThemeDat
     final visitor = ExtendedThemeDataVisitor();
     element.visitChildren(visitor);
 
-    final className = visitor.dartType.className;
+    final newClassName = visitor.dartType.className;
+    final originalClassName = '_$newClassName';
 
     final dataBuffer = StringBuffer();
 
-    dataBuffer.writeln('class $className {');
+    dataBuffer.writeln('class $newClassName {');
+
+    dataBuffer.writeln('final _defaults = $originalClassName();');
 
     visitor.fields.forEach((key, value) {
       final typeName = value.getDisplayString(withNullability: true).withoutLeadingUnderscore;
-      dataBuffer.writeln('final $typeName $key;');
+      dataBuffer.writeln('late final $typeName $key;');
     });
 
-    dataBuffer.writeln('const $className({');
+    dataBuffer.writeln('$newClassName({');
     visitor.fields.forEach((key, value) {
-      final requiredPrefix = value.toString().endsWith('?') ? '' : 'required';
-      dataBuffer.writeln('$requiredPrefix this.$key,');
+      final nullableType = '${value.getDisplayString(withNullability: false)}?';
+      dataBuffer.writeln('$nullableType $key,');
     });
-    dataBuffer.writeln('});');
-
+    dataBuffer.writeln('}){');
+    visitor.fields.forEach((key, value) {
+      //if (value.nullabilitySuffix == NullabilitySuffix.question) {
+      dataBuffer.writeln('this.$key = $key ?? _defaults.$key;');
+      //}
+    });
+    dataBuffer.writeln('}');
     dataBuffer.writeln('}');
 
     return dataBuffer.toString();

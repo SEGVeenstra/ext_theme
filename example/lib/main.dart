@@ -15,13 +15,17 @@ class MyApp extends StatelessWidget {
       builder: MyTheme.builder(
         light: MyThemeData(
           themeData: ThemeData.light(),
-          playerColors: const PlayerColorsData(
+          messageColors: MessageColorsData(),
+          playerColors: PlayerColorsData(
             player1: Colors.blue,
             player2: Colors.red,
           ),
         ),
         dark: MyThemeData(
           themeData: ThemeData.dark(),
+          messageColors: MessageColorsData(
+            warning: Colors.orange,
+          ),
           playerColors: PlayerColorsData(
             player1: Colors.blue.shade800,
             player2: Colors.red.shade800,
@@ -39,6 +43,9 @@ class Content extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: MyTheme.of(context).messageColors?.warning,
+      ),
       body: Column(
         children: [
           Expanded(

@@ -3,6 +3,7 @@ import 'package:analyzer/dart/element/type.dart';
 extension StringHelper on String {
   String get withoutLeadingUnderscore => startsWith('_') ? substring(1) : this;
   String get endWithData => endsWith('Data') ? this : '${this}Data';
+  String get endWithQuestionMark => endsWith('?') ? this : '${this}?';
 }
 
 extension DartTypeHelper on DartType {

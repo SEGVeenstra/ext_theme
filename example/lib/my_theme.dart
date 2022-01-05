@@ -1,4 +1,4 @@
-// ignore_for_file: unused_element
+// ignore_for_file: unused_element, unused_field
 
 import 'package:extended_theme/extended_theme.dart';
 import 'package:flutter/material.dart';
@@ -6,21 +6,21 @@ import 'package:flutter/material.dart';
 part 'my_theme.g.dart';
 
 @ExtendedTheme()
-abstract class _MyTheme {
-  _PlayerColorsData get playerColors;
-  _MessageColorsData? get messageColors;
-  Color? get gameBackgroundColor;
+class _MyTheme {
+  _PlayerColorsData playerColors = _PlayerColorsData();
+  _MessageColorsData? messageColors;
+  Color? gameBackgroundColor;
 }
 
 @ExtendedThemeData()
-abstract class _PlayerColorsData {
-  Color get player1;
-  Color get player2;
+class _PlayerColorsData {
+  Color? player1;
+  Color? player2;
 }
 
 @ExtendedThemeData()
-abstract class _MessageColorsData {
-  Color? get warning => Colors.yellow; // TODO: default values are currently not supported.
-  Color? get success => Colors.green;
-  Color? get danger => Colors.red;
+class _MessageColorsData {
+  Color warning = Colors.yellow; // TODO: default values are currently not supported.
+  Color? success;
+  Color? danger = Colors.red;
 }
