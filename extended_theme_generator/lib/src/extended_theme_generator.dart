@@ -5,6 +5,8 @@ import 'package:build/build.dart';
 import 'package:extended_theme/extended_theme.dart';
 import 'package:source_gen/source_gen.dart';
 
+import 'helpers.dart';
+
 class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
   @override
   generateForAnnotatedElement(Element element, ConstantReader annotation, BuildStep buildStep) {
@@ -15,7 +17,7 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
     final visitor = _ThemeVisitor();
     element.visitChildren(visitor);
 
-    final className = visitor.className.toString().substring(1);
+    final className = visitor.dartType.className;
     final dataClassName = '${className}Data';
     final inheritedWidgetName = '\$$className';
 
@@ -75,13 +77,7 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
     // fields
     themeBuilder.writeln('final ThemeData themeData;');
     visitor.fields.forEach((key, value) {
-      final oldFieldType = value.getDisplayString(withNullability: true);
-      final String fieldType;
-      if (oldFieldType.startsWith('_')) {
-        fieldType = oldFieldType.substring(1);
-      } else {
-        fieldType = oldFieldType;
-      }
+      final fieldType = value.getDisplayString(withNullability: true).withoutLeadingUnderscore;
       themeBuilder.writeln('final $fieldType $key;');
     });
 
@@ -125,12 +121,12 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
 }
 
 class _ThemeVisitor extends SimpleElementVisitor {
-  late final DartType className;
+  late final DartType dartType;
   final Map<String, DartType> fields = {};
 
   @override
   visitConstructorElement(ConstructorElement element) {
-    className = element.type.returnType;
+    dartType = element.type.returnType;
   }
 
   @override

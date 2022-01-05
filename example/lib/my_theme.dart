@@ -20,7 +20,7 @@ abstract class _PlayerColorsData {
 
 @ExtendedThemeData()
 abstract class _MessageColorsData {
-  Color? get warning => Colors.yellow;
+  Color? get warning => Colors.yellow; // TODO: default values are currently not supported.
   Color? get success => Colors.green;
   Color? get danger => Colors.red;
 }

@@ -5,6 +5,8 @@ import 'package:build/build.dart';
 import 'package:extended_theme/extended_theme.dart';
 import 'package:source_gen/source_gen.dart';
 
+import 'helpers.dart';
+
 class ExtendedThemeDataGenerator extends GeneratorForAnnotation<ExtendedThemeData> {
   @override
   generateForAnnotatedElement(Element element, ConstantReader annotation, BuildStep buildStep) {
@@ -15,14 +17,15 @@ class ExtendedThemeDataGenerator extends GeneratorForAnnotation<ExtendedThemeDat
     final visitor = ExtendedThemeDataVisitor();
     element.visitChildren(visitor);
 
-    final className = visitor.className.toString().substring(1);
+    final className = visitor.dartType.className;
 
     final dataBuffer = StringBuffer();
 
     dataBuffer.writeln('class $className {');
 
     visitor.fields.forEach((key, value) {
-      dataBuffer.writeln('final $value $key;');
+      final typeName = value.getDisplayString(withNullability: true).withoutLeadingUnderscore;
+      dataBuffer.writeln('final $typeName $key;');
     });
 
     dataBuffer.writeln('const $className({');
@@ -39,12 +42,12 @@ class ExtendedThemeDataGenerator extends GeneratorForAnnotation<ExtendedThemeDat
 }
 
 class ExtendedThemeDataVisitor extends SimpleElementVisitor {
-  late final DartType className;
+  late final DartType dartType;
   final Map<String, DartType> fields = {};
 
   @override
   visitConstructorElement(ConstructorElement element) {
-    className = element.type.returnType;
+    dartType = element.type.returnType;
   }
 
   @override
