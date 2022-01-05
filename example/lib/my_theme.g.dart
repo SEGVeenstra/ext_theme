@@ -46,10 +46,12 @@ class MyThemeData {
   final ThemeData themeData;
   final PlayerColorsData playerColors;
   final MessageColorsData? messageColors;
+  final Color? gameBackgroundColor;
   MyThemeData({
     ThemeData? themeData,
     required this.playerColors,
     this.messageColors,
+    this.gameBackgroundColor,
   }) : themeData = themeData ?? ThemeData();
 }
 

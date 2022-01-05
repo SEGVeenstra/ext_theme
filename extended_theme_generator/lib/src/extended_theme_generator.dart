@@ -75,7 +75,13 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
     // fields
     themeBuilder.writeln('final ThemeData themeData;');
     visitor.fields.forEach((key, value) {
-      final fieldType = value.toString().substring(1);
+      final oldFieldType = value.getDisplayString(withNullability: true);
+      final String fieldType;
+      if (oldFieldType.startsWith('_')) {
+        fieldType = oldFieldType.substring(1);
+      } else {
+        fieldType = oldFieldType;
+      }
       themeBuilder.writeln('final $fieldType $key;');
     });
 

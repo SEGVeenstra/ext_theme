@@ -9,6 +9,7 @@ part 'my_theme.g.dart';
 abstract class _MyTheme {
   _PlayerColorsData get playerColors;
   _MessageColorsData? get messageColors;
+  Color? get gameBackgroundColor;
 }
 
 @ExtendedThemeData()

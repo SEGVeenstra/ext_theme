@@ -12,9 +12,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'ExtendedTheme Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       builder: MyTheme.builder(
         light: MyThemeData(
           themeData: ThemeData.light(),
@@ -24,11 +21,12 @@ class MyApp extends StatelessWidget {
           ),
         ),
         dark: MyThemeData(
-            themeData: ThemeData.dark(),
-            playerColors: PlayerColorsData(
-              player1: Colors.blue.shade800,
-              player2: Colors.red.shade800,
-            )),
+          themeData: ThemeData.dark(),
+          playerColors: PlayerColorsData(
+            player1: Colors.blue.shade800,
+            player2: Colors.red.shade800,
+          ),
+        ),
       ),
       home: const Content(),
     );
