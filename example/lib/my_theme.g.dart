@@ -44,7 +44,13 @@ class MyTheme extends StatelessWidget {
 
 class MyThemeData {
   final ThemeData themeData;
-  MyThemeData({ThemeData? themeData}) : themeData = themeData ?? ThemeData();
+  final PlayerColorsData playerColors;
+  final MessageColorsData? messageColors;
+  MyThemeData({
+    ThemeData? themeData,
+    required this.playerColors,
+    this.messageColors,
+  }) : themeData = themeData ?? ThemeData();
 }
 
 class $MyTheme extends InheritedWidget {

@@ -74,11 +74,20 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
 
     // fields
     themeBuilder.writeln('final ThemeData themeData;');
+    visitor.fields.forEach((key, value) {
+      final fieldType = value.toString().substring(1);
+      themeBuilder.writeln('final $fieldType $key;');
+    });
 
     // constructor
-    themeBuilder.writeln('''
-      $dataClassName({ThemeData? themeData}) : themeData = themeData ?? ThemeData();
-    ''');
+    themeBuilder.writeln('$dataClassName({ ThemeData? themeData,');
+
+    visitor.fields.forEach((key, value) {
+      final requiredPrefix = value.toString().endsWith('?') ? '' : 'required';
+      themeBuilder.writeln('$requiredPrefix this.$key,');
+    });
+
+    themeBuilder.writeln('}): themeData = themeData ?? ThemeData();');
 
     themeBuilder.writeln('}'); // close data class
 
@@ -111,9 +120,15 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
 
 class _ThemeVisitor extends SimpleElementVisitor {
   late final DartType className;
+  final Map<String, DartType> fields = {};
 
   @override
   visitConstructorElement(ConstructorElement element) {
     className = element.type.returnType;
+  }
+
+  @override
+  visitFieldElement(FieldElement element) {
+    fields[element.name] = element.type;
   }
 }

@@ -16,8 +16,19 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       builder: MyTheme.builder(
-        light: MyThemeData(),
-        dark: MyThemeData(),
+        light: MyThemeData(
+          themeData: ThemeData.light(),
+          playerColors: const PlayerColorsData(
+            player1: Colors.blue,
+            player2: Colors.red,
+          ),
+        ),
+        dark: MyThemeData(
+            themeData: ThemeData.dark(),
+            playerColors: PlayerColorsData(
+              player1: Colors.blue.shade800,
+              player2: Colors.red.shade800,
+            )),
       ),
       home: const Content(),
     );
@@ -30,28 +41,28 @@ class Content extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          width: 200,
-          height: 200,
-          color: MyTheme.of(context).themeData.primaryColor,
-        ),
+      body: Column(
+        children: [
+          Expanded(
+            child: Center(
+              child: Container(
+                width: 200,
+                height: 200,
+                color: MyTheme.of(context).playerColors.player1,
+              ),
+            ),
+          ),
+          Expanded(
+            child: Center(
+              child: Container(
+                width: 200,
+                height: 200,
+                color: MyTheme.of(context).playerColors.player2,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
 }
-
-final myTheme = MyThemeData(
-  themeData: ThemeData.light().copyWith(),
-  playerColors: PlayerColorsData(
-    // Custom property
-    player1: Colors.blue,
-    player2: Colors.red,
-  ),
-  messageColors: MessageColorsData(
-    // Custom propery
-    warning: Colors.yellow,
-    error: Colors.red,
-    succes: Colors.green,
-  ),
-);
