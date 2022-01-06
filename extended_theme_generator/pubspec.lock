@@ -102,9 +102,11 @@ packages:
   extended_theme:
     dependency: "direct main"
     description:
-      path: "../extended_theme"
-      relative: true
-    source: path
+      path: extended_theme
+      ref: HEAD
+      resolved-ref: "958312fbe8970c32c1cf9b08a85f42fc9675db55"
+      url: "git@github.com:SEGVeenstra/extended_theme.git"
+    source: git
     version: "0.0.1"
   fake_async:
     dependency: transitive

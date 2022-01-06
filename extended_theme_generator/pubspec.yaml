@@ -15,12 +15,20 @@ dependencies:
   build: ^2.2.1
   source_gen: ^1.2.1
   extended_theme:
+    git:
+      url: git@github.com:SEGVeenstra/extended_theme.git
+      path: extended_theme
+
+dependency_override:
+  extended_theme:
     path: ../extended_theme
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.0
+
+  
 
 flutter:
 
