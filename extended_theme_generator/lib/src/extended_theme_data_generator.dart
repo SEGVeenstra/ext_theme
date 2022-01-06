@@ -7,9 +7,11 @@ import 'package:source_gen/source_gen.dart';
 
 import 'helpers.dart';
 
-class ExtendedThemeDataGenerator extends GeneratorForAnnotation<ExtendedThemeData> {
+class ExtendedThemeDataGenerator
+    extends GeneratorForAnnotation<ExtendedThemeData> {
   @override
-  generateForAnnotatedElement(Element element, ConstantReader annotation, BuildStep buildStep) {
+  generateForAnnotatedElement(
+      Element element, ConstantReader annotation, BuildStep buildStep) {
     return _generateThemeData(element, annotation);
   }
 
@@ -17,17 +19,20 @@ class ExtendedThemeDataGenerator extends GeneratorForAnnotation<ExtendedThemeDat
     final visitor = ExtendedThemeDataVisitor();
     element.visitChildren(visitor);
 
-    final newClassName = visitor.dartType.className.endWithData;
-    final originalClassName = visitor.dartType.getDisplayString(withNullability: true);
+    final newClassName = visitor.dartType.className;
+    final originalClassName =
+        visitor.dartType.getDisplayString(withNullability: true);
 
     final dataBuffer = StringBuffer();
 
-    dataBuffer.writeln('class $newClassName {');
+    dataBuffer.writeln('class $newClassName implements _$newClassName {');
 
     dataBuffer.writeln('final _defaults = $originalClassName();');
 
     visitor.fields.forEach((key, value) {
-      final typeName = value.getDisplayString(withNullability: true).withoutLeadingUnderscore;
+      final typeName = value
+          .getDisplayString(withNullability: true)
+          .withoutLeadingUnderscore;
       dataBuffer.writeln('late final $typeName $key;');
     });
 

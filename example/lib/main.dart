@@ -8,24 +8,24 @@ void main() {
 // Let's define our themes
 final smallTheme = MyThemeData(
   themeData: ThemeData(),
-  customWidget: CustomWidgetData(
+  customWidget: const CustomWidgetData(
     backgroundColor: Colors.red,
     height: 64,
     width: 64,
     shape: BoxShape.circle,
   ),
-  spaces: SpacesData(), // we'll use the defaults
+  // we'll use the default spaces
 );
 
 final largeTheme = MyThemeData(
   themeData: ThemeData(),
-  customWidget: CustomWidgetData(
+  customWidget: const CustomWidgetData(
     backgroundColor: Colors.blue,
     height: 128,
     width: 128,
     shape: BoxShape.rectangle,
   ),
-  spaces: SpacesData(
+  spaces: const SpacesData(
     small: 16,
     medium: 48,
     large: 64,
@@ -39,13 +39,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'ExtendedTheme Demo',
-      builder: MyTheme.builder(light: smallTheme), // We'll use smallTheme as our default
+      builder: MyTheme.builder(
+          light: smallTheme), // We'll use smallTheme as our default
       home: Scaffold(
         body: WidgetSwither(
-            widget1: const CustomWidget(), // This CustomWidget will use the smallTheme
+            widget1:
+                const CustomWidget(), // This CustomWidget will use the smallTheme
             widget2: MyTheme(
               light: largeTheme,
-              child: const CustomWidget(), // This CustomWidget has been wrapped MyTheme with largeTheme
+              child:
+                  const CustomWidget(), // This CustomWidget has been wrapped MyTheme with largeTheme
             )),
       ),
     );
@@ -113,7 +116,8 @@ class CustomWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: myTheme.customWidget.shape,
                 // Because backgroundColor is optional, we can fallback onto the default ThemeData
-                color: myTheme.customWidget.backgroundColor ?? myTheme.themeData.colorScheme.primary,
+                color: myTheme.customWidget.backgroundColor ??
+                    myTheme.themeData.colorScheme.primary,
               ),
             ),
           ),
@@ -123,13 +127,21 @@ class CustomWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Expanded(child: Container(color: myTheme.customWidget.backgroundColor)),
+              Expanded(
+                  child:
+                      Container(color: myTheme.customWidget.backgroundColor)),
               SizedBox(width: myTheme.spaces.small),
-              Expanded(child: Container(color: myTheme.customWidget.backgroundColor)),
+              Expanded(
+                  child:
+                      Container(color: myTheme.customWidget.backgroundColor)),
               SizedBox(width: myTheme.spaces.medium),
-              Expanded(child: Container(color: myTheme.customWidget.backgroundColor)),
+              Expanded(
+                  child:
+                      Container(color: myTheme.customWidget.backgroundColor)),
               SizedBox(width: myTheme.spaces.large),
-              Expanded(child: Container(color: myTheme.customWidget.backgroundColor)),
+              Expanded(
+                  child:
+                      Container(color: myTheme.customWidget.backgroundColor)),
             ],
           ),
         ),
