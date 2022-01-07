@@ -7,8 +7,7 @@ import 'package:source_gen/source_gen.dart';
 
 class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
   @override
-  generateForAnnotatedElement(
-      Element element, ConstantReader annotation, BuildStep buildStep) {
+  generateForAnnotatedElement(Element element, ConstantReader annotation, BuildStep buildStep) {
     return _generateTheme(element, annotation);
   }
 
@@ -16,8 +15,7 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
     final visitor = _ThemeVisitor();
     element.visitChildren(visitor);
 
-    final dataClassName =
-        visitor.dartType.getDisplayString(withNullability: false);
+    final dataClassName = visitor.dartType.getDisplayString(withNullability: false);
 
     if (dataClassName.startsWith('_')) {
       throw 'Cannot be private!';
@@ -26,8 +24,7 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
       throw 'End with ' 'Data\', like CustomThemeData';
     }
 
-    final themeWidgetName =
-        dataClassName.substring(0, dataClassName.length - 4);
+    final themeWidgetName = dataClassName.substring(0, dataClassName.length - 4);
 
     final inheritedWidgetName = 'Inherited$themeWidgetName';
 
@@ -82,8 +79,7 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
     themeBuilder.writeln('}'); // close theme class
 
     //## INHERITED WIDGET ##///
-    themeBuilder
-        .writeln('class $inheritedWidgetName extends InheritedWidget {');
+    themeBuilder.writeln('class $inheritedWidgetName extends InheritedWidget {');
 
     // Fields
     themeBuilder.writeln('final $dataClassName data;');

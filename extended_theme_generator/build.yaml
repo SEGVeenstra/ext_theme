@@ -6,10 +6,3 @@ builders:
     build_extensions: {".dart": [".theme.part"]}
     build_to: cache
     applies_builders: ["source_gen|combining_builder"]
-  extendedThemeDataBuilder:
-    import: 'package:extended_theme_generator/generator.dart'
-    builder_factories: [extendedThemeDataBuilder]
-    auto_apply: dependents
-    build_extensions: {".dart": [".theme_data.part"]}
-    build_to: cache
-    applies_builders: ["source_gen|combining_builder"]
