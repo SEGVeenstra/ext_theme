@@ -5,7 +5,9 @@ void main() {
   runApp(const MyApp());
 }
 
-final myTheme = MyThemeData();
+final myTheme = MyThemeData(
+  themeData: ThemeData(),
+);
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

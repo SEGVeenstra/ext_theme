@@ -3,11 +3,20 @@
 import 'package:extended_theme/extended_theme.dart';
 import 'package:flutter/material.dart';
 
-// You have to put this here... manually, ugh right?
-// But it will allow the generator to create a part file.
+import 'test.dart';
+
 part 'my_theme.g.dart';
 
-// Here we define our Theme's custom properties.
-// Be aware that all your 'definitions' are private classes (prefixed with '_').
 @ExtendedTheme()
-class MyThemeData {}
+class MyThemeData extends ExtendedThemeData {
+  MyThemeData({required ThemeData themeData}) : super(themeData: themeData);
+}
+
+// This doesn't work when I try to get the one from the extended_theme package.
+// No idea why...
+
+// abstract class ExtendedThemeData {
+//   final ThemeData themeData;
+
+//   const ExtendedThemeData({required this.themeData});
+// }
