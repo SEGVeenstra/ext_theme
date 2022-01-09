@@ -10,23 +10,4 @@ part 'my_theme.g.dart';
 // Here we define our Theme's custom properties.
 // Be aware that all your 'definitions' are private classes (prefixed with '_').
 @ExtendedTheme()
-class _MyTheme {
-  // You can use normal classes, but using @ExtendedThemeData will give you more benefits!
-  _CustomWidget customWidget = _CustomWidget();
-  _Spaces spaces = _Spaces();
-}
-
-@ExtendedThemeData()
-class _CustomWidget {
-  double width = 200;
-  double height = 200;
-  BoxShape shape = BoxShape.circle;
-  Color? backgroundColor;
-}
-
-@ExtendedThemeData()
-class _Spaces {
-  double small = 4.0;
-  double medium = 8.0;
-  double large = 16.0;
-}
+class MyTheme {}

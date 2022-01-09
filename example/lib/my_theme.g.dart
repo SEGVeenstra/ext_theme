@@ -44,12 +44,8 @@ class MyTheme extends StatelessWidget {
 
 class MyThemeData {
   final ThemeData themeData;
-  final CustomWidgetData customWidget;
-  final SpacesData spaces;
   MyThemeData({
     ThemeData? themeData,
-    required this.customWidget,
-    required this.spaces,
   }) : themeData = themeData ?? ThemeData();
 }
 
@@ -64,43 +60,4 @@ class $MyTheme extends InheritedWidget {
   @override
   bool updateShouldNotify(covariant InheritedWidget oldWidget) =>
       oldWidget != this;
-}
-
-// **************************************************************************
-// ExtendedThemeDataGenerator
-// **************************************************************************
-
-class CustomWidgetData {
-  final _defaults = _CustomWidget();
-  late final double width;
-  late final double height;
-  late final BoxShape shape;
-  late final Color? backgroundColor;
-  CustomWidgetData({
-    double? width,
-    double? height,
-    BoxShape? shape,
-    Color? backgroundColor,
-  }) {
-    this.width = width ?? _defaults.width;
-    this.height = height ?? _defaults.height;
-    this.shape = shape ?? _defaults.shape;
-    this.backgroundColor = backgroundColor ?? _defaults.backgroundColor;
-  }
-}
-
-class SpacesData {
-  final _defaults = _Spaces();
-  late final double small;
-  late final double medium;
-  late final double large;
-  SpacesData({
-    double? small,
-    double? medium,
-    double? large,
-  }) {
-    this.small = small ?? _defaults.small;
-    this.medium = medium ?? _defaults.medium;
-    this.large = large ?? _defaults.large;
-  }
 }

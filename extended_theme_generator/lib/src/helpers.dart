@@ -10,9 +10,9 @@ extension StringHelper on String {
 extension DartTypeHelper on DartType {
   String get className {
     final className = getDisplayString(withNullability: true);
-    if (!className.startsWith('_')) {
-      throw 'Your definition classes should be private (start with \'_\')';
+    if (className.startsWith('_')) {
+      throw 'Your definition classes should not be private (start with \'_\')';
     }
-    return className.withoutLeadingUnderscore;
+    return className;
   }
 }
