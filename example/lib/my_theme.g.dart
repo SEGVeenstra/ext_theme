@@ -20,7 +20,7 @@ class MyTheme extends StatelessWidget {
   Widget build(BuildContext context) {
     final brightness = MediaQuery.of(context).platformBrightness;
     final currentData = brightness == Brightness.light ? light : dark ?? light;
-    return $MyTheme(
+    return _MyTheme(
       data: currentData,
       child: Theme(
         data: currentData.themeData,
@@ -30,7 +30,7 @@ class MyTheme extends StatelessWidget {
   }
 
   static MyThemeData of(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<$MyTheme>()!.data;
+      context.dependOnInheritedWidgetOfExactType<_MyTheme>()!.data;
   static Widget Function(BuildContext, Widget?) builder({
     required MyThemeData light,
     MyThemeData? dark,
@@ -42,16 +42,9 @@ class MyTheme extends StatelessWidget {
           );
 }
 
-class MyThemeData {
-  final ThemeData themeData;
-  MyThemeData({
-    ThemeData? themeData,
-  }) : themeData = themeData ?? ThemeData();
-}
-
-class $MyTheme extends InheritedWidget {
+class _MyTheme extends InheritedWidget {
   final MyThemeData data;
-  const $MyTheme({required this.data, required Widget child, Key? key})
+  const _MyTheme({required this.data, required Widget child, Key? key})
       : super(
           key: key,
           child: child,

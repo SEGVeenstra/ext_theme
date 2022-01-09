@@ -10,4 +10,4 @@ part 'my_theme.g.dart';
 // Here we define our Theme's custom properties.
 // Be aware that all your 'definitions' are private classes (prefixed with '_').
 @ExtendedTheme()
-class MyTheme {}
+class MyThemeData {}

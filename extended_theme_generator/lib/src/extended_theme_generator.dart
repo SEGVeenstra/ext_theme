@@ -5,11 +5,10 @@ import 'package:build/build.dart';
 import 'package:extended_theme/extended_theme.dart';
 import 'package:source_gen/source_gen.dart';
 
-import 'helpers.dart';
-
 class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
   @override
-  generateForAnnotatedElement(Element element, ConstantReader annotation, BuildStep buildStep) {
+  generateForAnnotatedElement(
+      Element element, ConstantReader annotation, BuildStep buildStep) {
     return _generateTheme(element, annotation);
   }
 
@@ -17,20 +16,23 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
     final visitor = _ThemeVisitor();
     element.visitChildren(visitor);
 
-    final className = visitor.dartType.className;
-    final dataClassName = className.endWithData;
-    final inheritedWidgetName = '\$$className';
+    final dataClassName =
+        visitor.dartType.getDisplayString(withNullability: true);
+    final statelessWidgetName =
+        dataClassName.substring(0, dataClassName.length - 4);
+    final inheritedWidgetName = '_$statelessWidgetName';
 
     final themeBuilder = StringBuffer();
 
     //## THEME ##//
-    themeBuilder.writeln('class $className extends StatelessWidget {');
+    themeBuilder
+        .writeln('class $statelessWidgetName extends StatelessWidget {');
     // fields
     themeBuilder.writeln('final $dataClassName light;');
     themeBuilder.writeln('final $dataClassName? dark;');
     themeBuilder.writeln('final Widget child;');
     // constructor
-    themeBuilder.writeln('''const $className({
+    themeBuilder.writeln('''const $statelessWidgetName({
       required this.light,
       this.dark,
       required this.child,
@@ -62,7 +64,7 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
         required $dataClassName light,
         $dataClassName? dark,
       }) =>
-        (context, child) => $className(
+        (context, child) => $statelessWidgetName(
               light: light,
               dark: dark,
               child: child ?? ErrorWidget('Child required'),
@@ -71,36 +73,9 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
 
     themeBuilder.writeln('}'); // close theme class
 
-    //## DATA CLASS ##//
-    themeBuilder.writeln('class $dataClassName {');
-
-    // fields
-    themeBuilder.writeln('final ThemeData themeData;');
-    visitor.fields.forEach((key, value) {
-      final typeName = value.getDisplayString(withNullability: true);
-      final String fieldType;
-      if (typeName.hasLeadingUnderscore) {
-        fieldType = typeName.withoutLeadingUnderscore.endWithData;
-      } else {
-        fieldType = typeName.withoutLeadingUnderscore;
-      }
-      themeBuilder.writeln('final $fieldType $key;');
-    });
-
-    // constructor
-    themeBuilder.writeln('$dataClassName({ ThemeData? themeData,');
-
-    visitor.fields.forEach((key, value) {
-      final requiredPrefix = value.toString().endsWith('?') ? '' : 'required';
-      themeBuilder.writeln('$requiredPrefix this.$key,');
-    });
-
-    themeBuilder.writeln('}): themeData = themeData ?? ThemeData();');
-
-    themeBuilder.writeln('}'); // close data class
-
     //## INHERITED WIDGET ##///
-    themeBuilder.writeln('class $inheritedWidgetName extends InheritedWidget {');
+    themeBuilder
+        .writeln('class $inheritedWidgetName extends InheritedWidget {');
 
     // Fields
     themeBuilder.writeln('final $dataClassName data;');
