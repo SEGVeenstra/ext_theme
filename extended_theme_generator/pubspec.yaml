@@ -19,7 +19,7 @@ dependencies:
       url: git@github.com:SEGVeenstra/extended_theme.git
       path: extended_theme
 
-dependency_override:
+dependency_overrides:
   extended_theme:
     path: ../extended_theme
 
