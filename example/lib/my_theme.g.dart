@@ -6,11 +6,11 @@ part of 'my_theme.dart';
 // ExtendedThemeGenerator
 // **************************************************************************
 
-class MyTheme extends StatelessWidget {
-  final MyThemeData light;
-  final MyThemeData? dark;
+class ExtendedTheme extends StatelessWidget {
+  final ExtendedThemeData light;
+  final ExtendedThemeData? dark;
   final Widget child;
-  const MyTheme({
+  const ExtendedTheme({
     required this.light,
     this.dark,
     required this.child,
@@ -20,31 +20,35 @@ class MyTheme extends StatelessWidget {
   Widget build(BuildContext context) {
     final brightness = MediaQuery.of(context).platformBrightness;
     final currentData = brightness == Brightness.light ? light : dark ?? light;
-    return InheritedMyTheme(
+    return _ExtendedTheme(
       data: currentData,
       child: Theme(
-        data: currentData.themeData,
+        data: currentData.data,
         child: child,
       ),
     );
   }
 
-  static MyThemeData of(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<InheritedMyTheme>()!.data;
+  static ExtendedThemeData of(BuildContext context) {
+    final themeData = Theme.of(context);
+    return context.dependOnInheritedWidgetOfExactType<_ExtendedTheme>()!.data
+      ..data = themeData;
+  }
+
   static Widget Function(BuildContext, Widget?) builder({
-    required MyThemeData light,
-    MyThemeData? dark,
+    required ExtendedThemeData light,
+    ExtendedThemeData? dark,
   }) =>
-      (context, child) => MyTheme(
+      (context, child) => ExtendedTheme(
             light: light,
             dark: dark,
             child: child ?? ErrorWidget('Child required'),
           );
 }
 
-class InheritedMyTheme extends InheritedWidget {
-  final MyThemeData data;
-  const InheritedMyTheme({required this.data, required Widget child, Key? key})
+class _ExtendedTheme extends InheritedWidget {
+  final ExtendedThemeData data;
+  const _ExtendedTheme({required this.data, required Widget child, Key? key})
       : super(
           key: key,
           child: child,
@@ -53,4 +57,13 @@ class InheritedMyTheme extends InheritedWidget {
   @override
   bool updateShouldNotify(covariant InheritedWidget oldWidget) =>
       oldWidget != this;
+}
+
+class ExtendedThemeData {
+  late ThemeData data;
+  final CustomData extendedData;
+  ExtendedThemeData({
+    ThemeData? data,
+    required this.extendedData,
+  }) : data = data ?? ThemeData();
 }

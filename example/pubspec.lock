@@ -170,16 +170,14 @@ packages:
     source: hosted
     version: "2.2.1"
   extended_theme:
-    dependency: transitive
+    dependency: "direct main"
     description:
-      path: extended_theme
-      ref: HEAD
-      resolved-ref: c72807e3a59d09354f65ef148a543d18cf774f6f
-      url: "git@github.com:SEGVeenstra/extended_theme.git"
-    source: git
+      path: "../extended_theme"
+      relative: true
+    source: path
     version: "0.0.1"
   extended_theme_generator:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       path: "../extended_theme_generator"
       relative: true
@@ -468,4 +466,3 @@ packages:
     version: "3.1.0"
 sdks:
   dart: ">=2.14.0 <3.0.0"
-  flutter: ">=1.17.0"
