@@ -5,14 +5,14 @@ void main() {
   runApp(const MyApp());
 }
 
-final myTheme = ExtendedThemeData(
+final myTheme = MyAppThemeData(
   appData: const AppData(
     customColor: Colors.orange,
   ),
   data: ThemeData.light(),
 );
 
-final myDarkTheme = ExtendedThemeData(
+final myDarkTheme = MyAppThemeData(
   appData: const AppData(
     customColor: Colors.pink,
   ),

@@ -5,6 +5,7 @@ part 'my_theme.g.dart';
 
 @ExtendTheme(
   widgetName: 'MyAppTheme',
+  dataClassName: 'MyAppThemeData',
   extendedDataFieldName: 'appData',
 )
 class AppData {
