@@ -16,11 +16,11 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
     element.visitChildren(visitor);
 
     final dataClassName = visitor.dartType.getDisplayString(withNullability: true);
-    final statelessWidgetName = dataClassName.substring(0, dataClassName.length - 4);
+    final statelessWidgetName = annotaton.read(ExtendedTheme.widgetNameField).stringValue;
     final inheritedWidgetName = '_$statelessWidgetName';
-    const extendedThemeClassName = 'ExtendedThemeData';
-    const dataClassFieldName = 'extendedData';
-    const themeDataFieldName = 'data';
+    final extendedThemeClassName = annotaton.read(ExtendedTheme.dataClassNameField).stringValue;
+    final extendedDataFieldName = annotaton.read(ExtendedTheme.extendedDataFieldNameField).stringValue;
+    final themeDataFieldName = annotaton.read(ExtendedTheme.dataFieldNameField).stringValue;
 
     final themeBuilder = StringBuffer();
 
@@ -103,12 +103,12 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
     themeBuilder.writeln('class $extendedThemeClassName {');
 
     themeBuilder.writeln('late ThemeData $themeDataFieldName;');
-    themeBuilder.writeln('final $dataClassName $dataClassFieldName;');
+    themeBuilder.writeln('final $dataClassName $extendedDataFieldName;');
 
     themeBuilder.writeln('''
       $extendedThemeClassName({
         ThemeData? $themeDataFieldName,
-        required this.$dataClassFieldName,
+        required this.$extendedDataFieldName,
       }) : $themeDataFieldName = $themeDataFieldName ?? ThemeData();
     ''');
 
