@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 
 part 'my_theme.g.dart';
 
-@ExtendedTheme()
-class CustomData {
+@ExtendTheme(
+  widgetName: 'MyAppTheme',
+  extendedDataFieldName: 'appData',
+)
+class AppData {
   final Color customColor;
 
-  const CustomData({required this.customColor});
+  const AppData({required this.customColor});
 }

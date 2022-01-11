@@ -6,14 +6,14 @@ void main() {
 }
 
 final myTheme = ExtendedThemeData(
-  extendedData: const CustomData(
+  appData: const AppData(
     customColor: Colors.orange,
   ),
   data: ThemeData.light(),
 );
 
 final myDarkTheme = ExtendedThemeData(
-  extendedData: const CustomData(
+  appData: const AppData(
     customColor: Colors.pink,
   ),
   data: ThemeData.dark(),
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'ExtendedTheme Demo',
-      builder: ExtendedTheme.builder(
+      builder: MyAppTheme.builder(
         light: myTheme,
         dark: myDarkTheme,
       ),
@@ -40,13 +40,13 @@ class MyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final extendedTheme = ExtendedTheme.of(context);
+    final extendedTheme = MyAppTheme.of(context);
     return Scaffold(
       body: Center(
         child: Container(
           width: 200,
           height: 200,
-          color: extendedTheme.extendedData.customColor,
+          color: extendedTheme.appData.customColor,
           child: Text(
             'basic ThemeData usage',
             style: extendedTheme.data.textTheme.subtitle2,

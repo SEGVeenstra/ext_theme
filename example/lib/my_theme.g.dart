@@ -6,11 +6,11 @@ part of 'my_theme.dart';
 // ExtendedThemeGenerator
 // **************************************************************************
 
-class ExtendedTheme extends StatelessWidget {
+class MyAppTheme extends StatelessWidget {
   final ExtendedThemeData light;
   final ExtendedThemeData? dark;
   final Widget child;
-  const ExtendedTheme({
+  const MyAppTheme({
     required this.light,
     this.dark,
     required this.child,
@@ -20,7 +20,7 @@ class ExtendedTheme extends StatelessWidget {
   Widget build(BuildContext context) {
     final brightness = MediaQuery.of(context).platformBrightness;
     final currentData = brightness == Brightness.light ? light : dark ?? light;
-    return _ExtendedTheme(
+    return _MyAppTheme(
       data: currentData,
       child: Theme(
         data: currentData.data,
@@ -31,7 +31,7 @@ class ExtendedTheme extends StatelessWidget {
 
   static ExtendedThemeData of(BuildContext context) {
     final themeData = Theme.of(context);
-    return context.dependOnInheritedWidgetOfExactType<_ExtendedTheme>()!.data
+    return context.dependOnInheritedWidgetOfExactType<_MyAppTheme>()!.data
       ..data = themeData;
   }
 
@@ -39,16 +39,16 @@ class ExtendedTheme extends StatelessWidget {
     required ExtendedThemeData light,
     ExtendedThemeData? dark,
   }) =>
-      (context, child) => ExtendedTheme(
+      (context, child) => MyAppTheme(
             light: light,
             dark: dark,
             child: child ?? ErrorWidget('Child required'),
           );
 }
 
-class _ExtendedTheme extends InheritedWidget {
+class _MyAppTheme extends InheritedWidget {
   final ExtendedThemeData data;
-  const _ExtendedTheme({required this.data, required Widget child, Key? key})
+  const _MyAppTheme({required this.data, required Widget child, Key? key})
       : super(
           key: key,
           child: child,
@@ -61,9 +61,9 @@ class _ExtendedTheme extends InheritedWidget {
 
 class ExtendedThemeData {
   late ThemeData data;
-  final CustomData extendedData;
+  final AppData appData;
   ExtendedThemeData({
     ThemeData? data,
-    required this.extendedData,
+    required this.appData,
   }) : data = data ?? ThemeData();
 }

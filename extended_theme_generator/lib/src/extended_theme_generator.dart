@@ -5,7 +5,7 @@ import 'package:build/build.dart';
 import 'package:extended_theme/extended_theme.dart';
 import 'package:source_gen/source_gen.dart';
 
-class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
+class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendTheme> {
   @override
   generateForAnnotatedElement(Element element, ConstantReader annotation, BuildStep buildStep) {
     return _generateTheme(element, annotation);
@@ -16,11 +16,11 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
     element.visitChildren(visitor);
 
     final dataClassName = visitor.dartType.getDisplayString(withNullability: true);
-    final statelessWidgetName = annotaton.read(ExtendedTheme.widgetNameField).stringValue;
+    final statelessWidgetName = annotaton.read(ExtendTheme.widgetNameField).stringValue;
     final inheritedWidgetName = '_$statelessWidgetName';
-    final extendedThemeClassName = annotaton.read(ExtendedTheme.dataClassNameField).stringValue;
-    final extendedDataFieldName = annotaton.read(ExtendedTheme.extendedDataFieldNameField).stringValue;
-    final themeDataFieldName = annotaton.read(ExtendedTheme.dataFieldNameField).stringValue;
+    final extendedThemeClassName = annotaton.read(ExtendTheme.dataClassNameField).stringValue;
+    final extendedDataFieldName = annotaton.read(ExtendTheme.extendedDataFieldNameField).stringValue;
+    final themeDataFieldName = annotaton.read(ExtendTheme.dataFieldNameField).stringValue;
 
     final themeBuilder = StringBuffer();
 

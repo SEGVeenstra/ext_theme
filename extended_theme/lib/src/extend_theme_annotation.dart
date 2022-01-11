@@ -1,4 +1,4 @@
-class ExtendedTheme {
+class ExtendTheme {
   static const dataClassNameField = 'dataClassName';
   static const extendedDataFieldNameField = 'extendedDataFieldName';
   static const dataFieldNameField = 'dataFieldName';
@@ -8,7 +8,8 @@ class ExtendedTheme {
   final String extendedDataFieldName;
   final String dataFieldName;
   final String widgetName;
-  const ExtendedTheme({
+
+  const ExtendTheme({
     this.dataClassName = 'ExtendedThemeData',
     this.dataFieldName = 'data',
     this.extendedDataFieldName = 'extendedData',

@@ -1,3 +1,3 @@
 library extended_theme;
 
-export 'src/extended_theme.dart';
+export 'src/extend_theme_annotation.dart';
