@@ -23,14 +23,18 @@ class MyTheme extends StatelessWidget {
     return _MyTheme(
       data: currentData,
       child: Theme(
-        data: currentData.themeData,
+        data: currentData.data,
         child: child,
       ),
     );
   }
 
-  static ExtendedThemeData of(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<_MyTheme>()!.data;
+  static ExtendedThemeData of(BuildContext context) {
+    final themeData = Theme.of(context);
+    return context.dependOnInheritedWidgetOfExactType<_MyTheme>()!.data
+      ..data = themeData;
+  }
+
   static Widget Function(BuildContext, Widget?) builder({
     required ExtendedThemeData light,
     ExtendedThemeData? dark,
@@ -56,10 +60,10 @@ class _MyTheme extends InheritedWidget {
 }
 
 class ExtendedThemeData {
-  late ThemeData themeData;
+  late ThemeData data;
   final MyThemeData extendedData;
   ExtendedThemeData({
-    ThemeData? themeData,
+    ThemeData? data,
     required this.extendedData,
-  }) : themeData = themeData ?? ThemeData();
+  }) : data = data ?? ThemeData();
 }

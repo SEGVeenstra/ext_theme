@@ -7,5 +7,7 @@ part 'my_theme.g.dart';
 
 @ExtendedTheme()
 class MyThemeData {
-  MyThemeData();
+  final Color customColor;
+
+  const MyThemeData({required this.customColor});
 }

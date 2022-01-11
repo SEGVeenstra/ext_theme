@@ -6,8 +6,10 @@ void main() {
 }
 
 final myTheme = ExtendedThemeData(
-  extendedData: MyThemeData(),
-  themeData: ThemeData.light(),
+  extendedData: const MyThemeData(
+    customColor: Colors.orange,
+  ),
+  data: ThemeData.light(),
 );
 
 class MyApp extends StatelessWidget {
@@ -18,9 +20,27 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'ExtendedTheme Demo',
       builder: MyTheme.builder(light: myTheme),
-      home: const Scaffold(
-        body: Center(
-          child: Text('test'),
+      home: const MyPage(),
+    );
+  }
+}
+
+class MyPage extends StatelessWidget {
+  const MyPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final extendedTheme = MyTheme.of(context);
+    return Scaffold(
+      body: Center(
+        child: Container(
+          width: 200,
+          height: 200,
+          color: extendedTheme.extendedData.customColor,
+          child: Text(
+            'basic ThemeData usage',
+            style: extendedTheme.data.textTheme.subtitle2,
+          ),
         ),
       ),
     );

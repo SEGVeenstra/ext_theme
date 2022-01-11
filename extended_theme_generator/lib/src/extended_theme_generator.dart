@@ -20,6 +20,7 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
     final inheritedWidgetName = '_$statelessWidgetName';
     const extendedThemeClassName = 'ExtendedThemeData';
     const dataClassFieldName = 'extendedData';
+    const themeDataFieldName = 'data';
 
     final themeBuilder = StringBuffer();
 
@@ -45,7 +46,7 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
         return $inheritedWidgetName(
           data: currentData,
           child: Theme(
-            data: currentData.themeData,
+            data: currentData.$themeDataFieldName,
             child: child,
           ),
         );
@@ -53,8 +54,12 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
     ''');
 
     // Convenient method
-    themeBuilder.writeln(
-        'static $extendedThemeClassName of(BuildContext context) => context.dependOnInheritedWidgetOfExactType<$inheritedWidgetName>()!.data;');
+    themeBuilder.writeln('''
+      static $extendedThemeClassName of(BuildContext context) {
+          final themeData = Theme.of(context);
+          return context.dependOnInheritedWidgetOfExactType<$inheritedWidgetName>()!.data..$themeDataFieldName = themeData;
+        }
+    ''');
 
     // Builder method
     themeBuilder.writeln('''
@@ -97,14 +102,14 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
     //## DATACLASS WRAPPER
     themeBuilder.writeln('class $extendedThemeClassName {');
 
-    themeBuilder.writeln('late ThemeData themeData;');
+    themeBuilder.writeln('late ThemeData $themeDataFieldName;');
     themeBuilder.writeln('final $dataClassName $dataClassFieldName;');
 
     themeBuilder.writeln('''
       $extendedThemeClassName({
-        ThemeData? themeData,
+        ThemeData? $themeDataFieldName,
         required this.$dataClassFieldName,
-      }) : themeData = themeData ?? ThemeData();
+      }) : $themeDataFieldName = $themeDataFieldName ?? ThemeData();
     ''');
 
     themeBuilder.writeln('}'); // close ExtendedTheme
