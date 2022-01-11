@@ -11,10 +11,9 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
-Easily extend the theming in `flutter`.
-Add custom properties and styles for custom widgets in a heartbeat.
+Easily extend the theming in `flutter`. Add custom properties and styles for custom widgets in a heartbeat.
 
-This package contains the annotation for `exteneded_theme_generator`.
+This package contains the annotation for `extended_theme_generator`.
 
 ## Features
 
@@ -28,7 +27,7 @@ extended_theme: any
 ```
 and add `extended_theme_generator` as a `dev_dependency`.
 ```yaml
-exteneded_theme_generator: any
+extended_theme_generator: any
 ```
 
 ## Usage
@@ -46,7 +45,7 @@ Also don't forget to add the `part` section, or else the generator can't generat
 ```dart
 part my_theme.g.dart;
 
-@ExtendTheme
+@ExtendTheme()
 class MyData {
     final Color customColor;
 
@@ -54,14 +53,14 @@ class MyData {
 }
 ```
 
-### Step 2: generate the theme classes
+### Step 2: Generate the extended theme classes
 
 Run `build_runner` to generate your custom theme.
 ```
 flutter pub run build_runner build
 ```
 
-### Step 3: configure your themes
+### Step 3: Configure your themes
 
 Use your newly generated theme classes to define your themes.
 
@@ -83,11 +82,10 @@ To be able to access our new theme, we need to add it to the MaterialApp. We wil
 
 ```dart
 return MaterialApp(
-	builder: ExtendedTheme.builder(
+    builder: ExtendedTheme.builder(
     	light: myLightTheme,
     	dark: myDarkTheme,
     ),
-    ...
 );
 ```
 
@@ -104,13 +102,13 @@ final customColor = myTheme.extendedData.customColor;
 
 ### Optional: Use custom names
 
-You can choose to define your own names for the classes that this package with generate by overriding them in the annotation.
+You can choose to define your own names for the classes that this package will generate by overriding them in the annotation.
 
-This way you can make the generated theme a bit more app specific.
+This way you can make the generated theme feel more app specific.
 
 __widgetName__
 
-Setting `widgetName` tells the generator which name to use for the `Widget` that you add to the _widget tree_ and use to get the `ExtendedTheme` from context.
+Setting `widgetName` tells the generator which name to use for the `Widget` that you add to the _widget tree_ and use to get the `ExtendedThemeData` from context.
 ```dart
 @ExtendTheme(widgetName: 'MyTheme')
 
