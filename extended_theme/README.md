@@ -11,7 +11,9 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
-A simple, yet powerfull way to extend theming in `flutter`.
+Easily extend the theming in `flutter`.
+Add custom properties and styles for custom widgets in a heartbeat.
+
 This package contains the annotation for `exteneded_theme_generator`.
 
 ## Features
@@ -31,7 +33,7 @@ exteneded_theme_generator: any
 
 ## Usage
 
-Your custom theme will be up and running in no time, just follow these easy steps:
+Your custom theme will be up and running in no time, just follow these steps.
 
 ### Step 1: Create your custom theme data
 
@@ -52,14 +54,14 @@ class MyData {
 }
 ```
 
-### Step 2: generate the theme
+### Step 2: generate the theme classes
 
 Run `build_runner` to generate your custom theme.
 ```
 flutter pub run build_runner build
 ```
 
-### Step 3: create your themes
+### Step 3: configure your themes
 
 Use your newly generated theme classes to define your themes.
 
@@ -69,7 +71,7 @@ final myLightTheme = ExtenededThemeData(
     extendedData: MyData(customColor: Colors.orange),
 );
 
-final mydarkTheme = ExtenededThemeData(
+final myDarkTheme = ExtenededThemeData(
     data: ThemeData.dark(),
     extendedData: MyData(customColor: Colors.red),
 );
@@ -77,7 +79,7 @@ final mydarkTheme = ExtenededThemeData(
 
 ### Step 4: Add to MaterialApp
 
-To be able to access our new theme, we need to add it to the MaterialApp.
+To be able to access our new theme, we need to add it to the MaterialApp. We will use the conveniently generated `.builder` function.
 
 ```dart
 return MaterialApp(
@@ -92,6 +94,7 @@ return MaterialApp(
 ### Step 5: Use your theme
 
 ```dart
+// grab the current active theme from context.
 final myTheme = ExtendedTheme.of(context);
 // access ThemeData properties.
 final scaffoldColor = myTheme.data.scaffoldBackgroundColor;
@@ -99,8 +102,53 @@ final scaffoldColor = myTheme.data.scaffoldBackgroundColor;
 final customColor = myTheme.extendedData.customColor;
 ```
 
+### Optional: Use custom names
+
+You can choose to define your own names for the classes that this package with generate by overriding them in the annotation.
+
+This way you can make the generated theme a bit more app specific.
+
+__widgetName__
+
+Setting `widgetName` tells the generator which name to use for the `Widget` that you add to the _widget tree_ and use to get the `ExtendedTheme` from context.
+```dart
+@ExtendTheme(widgetName: 'MyTheme')
+
+ExtendedTheme.of(context); // before
+MyTheme.of(context); // after
+```
+
+__dataClassName__
+
+Setting `dataClassName` tells the generator which name to use instead of `ExtendedThemeData`. This is the class you use to define your themes.
+```dart
+@ExtendTheme(dataClassName: 'MyThemeData')
+
+final mylightTheme = ExtendedThemeData(...); // before
+final mylightTheme = MyThemeData(...); // after
+```
+
+__extendedDataFieldName__
+
+Setting `extendedDataFieldName` tells the generator which name to use for getting your custom data from `ExtendedThemeData`.
+```dart
+@ExtendTheme(extendedDataFieldName: 'custom')
+
+ExtendedTheme.of(context).extendedData.customColor; // before
+ExtendedTheme.of(context).custom.customColor; // after
+```
+
+__dataFieldName__
+
+Setting `dataFieldName` tells the generator which name to use for getting the original data from `ExtendedThemeData`.
+```dart
+@ExtendTheme(dataFieldName: 'd')
+
+ExtendedTheme.of(context).data.scaffoldBackgroundColor; // before
+ExtendedTheme.of(context).d.scaffoldBackgroundColor; // after
+```
+
+
 ## Additional information
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+This package is based on a solution I proposed in this [article](https://medium.com/@seg.veenstra/extending-the-flutter-theme-48799ebe6c5d) for which you have to create several classes/widgets yourself. This package will do all of that for you.
