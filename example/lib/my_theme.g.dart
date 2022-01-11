@@ -7,8 +7,8 @@ part of 'my_theme.dart';
 // **************************************************************************
 
 class MyTheme extends StatelessWidget {
-  final MyThemeData light;
-  final MyThemeData? dark;
+  final ExtendedThemeData light;
+  final ExtendedThemeData? dark;
   final Widget child;
   const MyTheme({
     required this.light,
@@ -29,11 +29,11 @@ class MyTheme extends StatelessWidget {
     );
   }
 
-  static MyThemeData of(BuildContext context) =>
+  static ExtendedThemeData of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<_MyTheme>()!.data;
   static Widget Function(BuildContext, Widget?) builder({
-    required MyThemeData light,
-    MyThemeData? dark,
+    required ExtendedThemeData light,
+    ExtendedThemeData? dark,
   }) =>
       (context, child) => MyTheme(
             light: light,
@@ -43,7 +43,7 @@ class MyTheme extends StatelessWidget {
 }
 
 class _MyTheme extends InheritedWidget {
-  final MyThemeData data;
+  final ExtendedThemeData data;
   const _MyTheme({required this.data, required Widget child, Key? key})
       : super(
           key: key,
@@ -53,4 +53,13 @@ class _MyTheme extends InheritedWidget {
   @override
   bool updateShouldNotify(covariant InheritedWidget oldWidget) =>
       oldWidget != this;
+}
+
+class ExtendedThemeData {
+  late ThemeData themeData;
+  final MyThemeData extendedData;
+  ExtendedThemeData({
+    ThemeData? themeData,
+    required this.extendedData,
+  }) : themeData = themeData ?? ThemeData();
 }

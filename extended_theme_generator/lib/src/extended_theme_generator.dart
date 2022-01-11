@@ -7,8 +7,7 @@ import 'package:source_gen/source_gen.dart';
 
 class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
   @override
-  generateForAnnotatedElement(
-      Element element, ConstantReader annotation, BuildStep buildStep) {
+  generateForAnnotatedElement(Element element, ConstantReader annotation, BuildStep buildStep) {
     return _generateTheme(element, annotation);
   }
 
@@ -16,20 +15,19 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
     final visitor = _ThemeVisitor();
     element.visitChildren(visitor);
 
-    final dataClassName =
-        visitor.dartType.getDisplayString(withNullability: true);
-    final statelessWidgetName =
-        dataClassName.substring(0, dataClassName.length - 4);
+    final dataClassName = visitor.dartType.getDisplayString(withNullability: true);
+    final statelessWidgetName = dataClassName.substring(0, dataClassName.length - 4);
     final inheritedWidgetName = '_$statelessWidgetName';
+    const extendedThemeClassName = 'ExtendedThemeData';
+    const dataClassFieldName = 'extendedData';
 
     final themeBuilder = StringBuffer();
 
     //## THEME ##//
-    themeBuilder
-        .writeln('class $statelessWidgetName extends StatelessWidget {');
+    themeBuilder.writeln('class $statelessWidgetName extends StatelessWidget {');
     // fields
-    themeBuilder.writeln('final $dataClassName light;');
-    themeBuilder.writeln('final $dataClassName? dark;');
+    themeBuilder.writeln('final $extendedThemeClassName light;');
+    themeBuilder.writeln('final $extendedThemeClassName? dark;');
     themeBuilder.writeln('final Widget child;');
     // constructor
     themeBuilder.writeln('''const $statelessWidgetName({
@@ -56,13 +54,13 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
 
     // Convenient method
     themeBuilder.writeln(
-        'static $dataClassName of(BuildContext context) => context.dependOnInheritedWidgetOfExactType<$inheritedWidgetName>()!.data;');
+        'static $extendedThemeClassName of(BuildContext context) => context.dependOnInheritedWidgetOfExactType<$inheritedWidgetName>()!.data;');
 
     // Builder method
     themeBuilder.writeln('''
       static Widget Function(BuildContext, Widget?) builder({
-        required $dataClassName light,
-        $dataClassName? dark,
+        required $extendedThemeClassName light,
+        $extendedThemeClassName? dark,
       }) =>
         (context, child) => $statelessWidgetName(
               light: light,
@@ -74,11 +72,10 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
     themeBuilder.writeln('}'); // close theme class
 
     //## INHERITED WIDGET ##///
-    themeBuilder
-        .writeln('class $inheritedWidgetName extends InheritedWidget {');
+    themeBuilder.writeln('class $inheritedWidgetName extends InheritedWidget {');
 
     // Fields
-    themeBuilder.writeln('final $dataClassName data;');
+    themeBuilder.writeln('final $extendedThemeClassName data;');
 
     // Constructor
     themeBuilder.writeln('''
@@ -96,6 +93,21 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendedTheme> {
     ''');
 
     themeBuilder.writeln('}');
+
+    //## DATACLASS WRAPPER
+    themeBuilder.writeln('class $extendedThemeClassName {');
+
+    themeBuilder.writeln('late ThemeData themeData;');
+    themeBuilder.writeln('final $dataClassName $dataClassFieldName;');
+
+    themeBuilder.writeln('''
+      $extendedThemeClassName({
+        ThemeData? themeData,
+        required this.$dataClassFieldName,
+      }) : themeData = themeData ?? ThemeData();
+    ''');
+
+    themeBuilder.writeln('}'); // close ExtendedTheme
 
     return themeBuilder.toString();
   }

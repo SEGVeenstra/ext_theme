@@ -5,8 +5,9 @@ void main() {
   runApp(const MyApp());
 }
 
-final myTheme = MyThemeData(
-  themeData: ThemeData(),
+final myTheme = ExtendedThemeData(
+  extendedData: MyThemeData(),
+  themeData: ThemeData.light(),
 );
 
 class MyApp extends StatelessWidget {
@@ -16,8 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'ExtendedTheme Demo',
-      builder: MyTheme.builder(
-          light: myTheme), // We'll use smallTheme as our default
+      builder: MyTheme.builder(light: myTheme),
       home: const Scaffold(
         body: Center(
           child: Text('test'),
