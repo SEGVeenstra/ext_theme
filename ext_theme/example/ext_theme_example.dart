@@ -10,10 +10,10 @@ import 'package:flutter/material.dart';
 /// This can add any property you want so you can also create
 /// style-objects for your custom widgets.
 @ExtTheme(
-  widgetName: 'MyTheme', // optional, defaults to 'ExtTheme'.
-  dataClassName: 'MyThemeData', // optional, defaults to 'ExtThemeData'.
+  widgetName: 'MyTheme', // optional, defaults to 'ExtendedTheme'.
+  dataClassName: 'MyThemeData', // optional, defaults to 'ExtendedThemeData'.
   dataFieldName: 'data', // optional, defaults to 'data'
-  extendedDataFieldName: 'myData', // optional, defaults to 'extData'.
+  extendedDataFieldName: 'myData', // optional, defaults to 'extendedData'.
 )
 class MyData {
   final Color myCustomColor;
