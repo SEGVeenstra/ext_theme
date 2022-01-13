@@ -31,8 +31,10 @@ class MyAppTheme extends StatelessWidget {
 
   static MyAppThemeData of(BuildContext context) {
     final themeData = Theme.of(context);
-    return context.dependOnInheritedWidgetOfExactType<_MyAppTheme>()!.data
-      ..data = themeData;
+    return context
+        .dependOnInheritedWidgetOfExactType<_MyAppTheme>()!
+        .data
+        .copyWith(data: themeData);
   }
 
   static Widget Function(BuildContext, Widget?) builder({
@@ -60,10 +62,19 @@ class _MyAppTheme extends InheritedWidget {
 }
 
 class MyAppThemeData {
-  late ThemeData data;
+  final ThemeData data;
   final AppData appData;
   MyAppThemeData({
     ThemeData? data,
     required this.appData,
   }) : data = data ?? ThemeData();
+
+  MyAppThemeData copyWith({
+    ThemeData? data,
+    AppData? appData,
+  }) =>
+      MyAppThemeData(
+        appData: appData ?? this.appData,
+        data: data ?? this.data,
+      );
 }

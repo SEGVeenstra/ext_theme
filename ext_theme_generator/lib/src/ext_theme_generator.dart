@@ -64,7 +64,9 @@ class ExtThemeGenerator extends GeneratorForAnnotation<ExtTheme> {
     themeBuilder.writeln('''
       static $extThemeClassName of(BuildContext context) {
           final themeData = Theme.of(context);
-          return context.dependOnInheritedWidgetOfExactType<$inheritedWidgetName>()!.data..$themeDataFieldName = themeData;
+          return context.dependOnInheritedWidgetOfExactType<$inheritedWidgetName>()!
+            .data
+            .copyWith($themeDataFieldName: themeData);
         }
     ''');
 
@@ -110,7 +112,7 @@ class ExtThemeGenerator extends GeneratorForAnnotation<ExtTheme> {
     //## DATACLASS WRAPPER
     themeBuilder.writeln('class $extThemeClassName {');
 
-    themeBuilder.writeln('late ThemeData $themeDataFieldName;');
+    themeBuilder.writeln('final ThemeData $themeDataFieldName;');
     themeBuilder.writeln('final $dataClassName $extDataFieldName;');
 
     themeBuilder.writeln('''
@@ -118,6 +120,17 @@ class ExtThemeGenerator extends GeneratorForAnnotation<ExtTheme> {
         ThemeData? $themeDataFieldName,
         required this.$extDataFieldName,
       }) : $themeDataFieldName = $themeDataFieldName ?? ThemeData();
+    ''');
+
+    themeBuilder.writeln('''
+      $extThemeClassName copyWith({
+        ThemeData? $themeDataFieldName,
+        $dataClassName? $extDataFieldName,
+      }) =>
+        $extThemeClassName(
+          $extDataFieldName: $extDataFieldName ?? this.$extDataFieldName,
+          $themeDataFieldName: $themeDataFieldName ?? this.$themeDataFieldName,
+        );
     ''');
 
     themeBuilder.writeln('}'); // close ExtTheme

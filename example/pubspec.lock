@@ -7,14 +7,14 @@ packages:
       name: _fe_analyzer_shared
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "32.0.0"
+    version: "33.0.0"
   analyzer:
     dependency: transitive
     description:
       name: analyzer
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.0"
+    version: "3.1.0"
   args:
     dependency: transitive
     description:
@@ -179,9 +179,9 @@ packages:
   ext_theme_generator:
     dependency: "direct dev"
     description:
-      path: "../ext_theme_generator"
-      relative: true
-    source: path
+      name: ext_theme_generator
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.0.1-dev.1"
   fake_async:
     dependency: transitive
@@ -466,3 +466,4 @@ packages:
     version: "3.1.0"
 sdks:
   dart: ">=2.14.0 <3.0.0"
+  flutter: ">=1.17.0"
