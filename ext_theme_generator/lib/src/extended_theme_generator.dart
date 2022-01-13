@@ -2,12 +2,13 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:analyzer/dart/element/visitor.dart';
 import 'package:build/build.dart';
-import 'package:extended_theme/extended_theme.dart';
+import 'package:ext_theme/ext_theme.dart';
 import 'package:source_gen/source_gen.dart';
 
-class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendTheme> {
+class ExtThemeGenerator extends GeneratorForAnnotation<ExtTheme> {
   @override
-  generateForAnnotatedElement(Element element, ConstantReader annotation, BuildStep buildStep) {
+  generateForAnnotatedElement(
+      Element element, ConstantReader annotation, BuildStep buildStep) {
     return _generateTheme(element, annotation);
   }
 
@@ -15,20 +16,26 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendTheme> {
     final visitor = _ThemeVisitor();
     element.visitChildren(visitor);
 
-    final dataClassName = visitor.dartType.getDisplayString(withNullability: true);
-    final statelessWidgetName = annotaton.read(ExtendTheme.widgetNameField).stringValue;
+    final dataClassName =
+        visitor.dartType.getDisplayString(withNullability: true);
+    final statelessWidgetName =
+        annotaton.read(ExtTheme.widgetNameField).stringValue;
     final inheritedWidgetName = '_$statelessWidgetName';
-    final extendedThemeClassName = annotaton.read(ExtendTheme.dataClassNameField).stringValue;
-    final extendedDataFieldName = annotaton.read(ExtendTheme.extendedDataFieldNameField).stringValue;
-    final themeDataFieldName = annotaton.read(ExtendTheme.dataFieldNameField).stringValue;
+    final extThemeClassName =
+        annotaton.read(ExtTheme.dataClassNameField).stringValue;
+    final extDataFieldName =
+        annotaton.read(ExtTheme.extDataFieldNameField).stringValue;
+    final themeDataFieldName =
+        annotaton.read(ExtTheme.dataFieldNameField).stringValue;
 
     final themeBuilder = StringBuffer();
 
     //## THEME ##//
-    themeBuilder.writeln('class $statelessWidgetName extends StatelessWidget {');
+    themeBuilder
+        .writeln('class $statelessWidgetName extends StatelessWidget {');
     // fields
-    themeBuilder.writeln('final $extendedThemeClassName light;');
-    themeBuilder.writeln('final $extendedThemeClassName? dark;');
+    themeBuilder.writeln('final $extThemeClassName light;');
+    themeBuilder.writeln('final $extThemeClassName? dark;');
     themeBuilder.writeln('final Widget child;');
     // constructor
     themeBuilder.writeln('''const $statelessWidgetName({
@@ -55,7 +62,7 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendTheme> {
 
     // Convenient method
     themeBuilder.writeln('''
-      static $extendedThemeClassName of(BuildContext context) {
+      static $extThemeClassName of(BuildContext context) {
           final themeData = Theme.of(context);
           return context.dependOnInheritedWidgetOfExactType<$inheritedWidgetName>()!.data..$themeDataFieldName = themeData;
         }
@@ -64,8 +71,8 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendTheme> {
     // Builder method
     themeBuilder.writeln('''
       static Widget Function(BuildContext, Widget?) builder({
-        required $extendedThemeClassName light,
-        $extendedThemeClassName? dark,
+        required $extThemeClassName light,
+        $extThemeClassName? dark,
       }) =>
         (context, child) => $statelessWidgetName(
               light: light,
@@ -77,10 +84,11 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendTheme> {
     themeBuilder.writeln('}'); // close theme class
 
     //## INHERITED WIDGET ##///
-    themeBuilder.writeln('class $inheritedWidgetName extends InheritedWidget {');
+    themeBuilder
+        .writeln('class $inheritedWidgetName extends InheritedWidget {');
 
     // Fields
-    themeBuilder.writeln('final $extendedThemeClassName data;');
+    themeBuilder.writeln('final $extThemeClassName data;');
 
     // Constructor
     themeBuilder.writeln('''
@@ -100,19 +108,19 @@ class ExtendedThemeGenerator extends GeneratorForAnnotation<ExtendTheme> {
     themeBuilder.writeln('}');
 
     //## DATACLASS WRAPPER
-    themeBuilder.writeln('class $extendedThemeClassName {');
+    themeBuilder.writeln('class $extThemeClassName {');
 
     themeBuilder.writeln('late ThemeData $themeDataFieldName;');
-    themeBuilder.writeln('final $dataClassName $extendedDataFieldName;');
+    themeBuilder.writeln('final $dataClassName $extDataFieldName;');
 
     themeBuilder.writeln('''
-      $extendedThemeClassName({
+      $extThemeClassName({
         ThemeData? $themeDataFieldName,
-        required this.$extendedDataFieldName,
+        required this.$extDataFieldName,
       }) : $themeDataFieldName = $themeDataFieldName ?? ThemeData();
     ''');
 
-    themeBuilder.writeln('}'); // close ExtendedTheme
+    themeBuilder.writeln('}'); // close ExtTheme
 
     return themeBuilder.toString();
   }

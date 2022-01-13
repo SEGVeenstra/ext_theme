@@ -1,5 +1,5 @@
-name: extended_theme_generator
-description: Generator for extended_theme.
+name: ext_theme_generator
+description: Generator for ext_theme.
 version: 0.0.1
 publish_to: none
 homepage:
@@ -14,14 +14,14 @@ dependencies:
 
   build: ^2.2.1
   source_gen: ^1.2.1
-  extended_theme:
+  ext_theme:
     git:
-      url: git@github.com:SEGVeenstra/extended_theme.git
-      path: extended_theme
+      url: git@github.com:SEGVeenstra/ext_theme.git
+      path: ext_theme
 
 dependency_overrides:
-  extended_theme:
-    path: ../extended_theme
+  ext_theme:
+    path: ../ext_theme
 
 dev_dependencies:
   flutter_test:

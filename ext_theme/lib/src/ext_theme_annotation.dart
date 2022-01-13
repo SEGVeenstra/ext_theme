@@ -1,18 +1,18 @@
-class ExtendTheme {
+class ExtTheme {
   static const dataClassNameField = 'dataClassName';
-  static const extendedDataFieldNameField = 'extendedDataFieldName';
+  static const extDataFieldNameField = 'extDataFieldName';
   static const dataFieldNameField = 'dataFieldName';
   static const widgetNameField = 'widgetName';
 
   final String dataClassName;
-  final String extendedDataFieldName;
+  final String extDataFieldName;
   final String dataFieldName;
   final String widgetName;
 
-  const ExtendTheme({
-    this.dataClassName = 'ExtendedThemeData',
+  const ExtTheme({
+    this.dataClassName = 'ExtThemeData',
     this.dataFieldName = 'data',
-    this.extendedDataFieldName = 'extendedData',
-    this.widgetName = 'ExtendedTheme',
+    this.extDataFieldName = 'extData',
+    this.widgetName = 'ExtTheme',
   });
 }

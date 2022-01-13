@@ -1,7 +1,7 @@
 builders:
-  extendedThemeBuilder:
-    import: 'package:extended_theme_generator/generator.dart'
-    builder_factories: [extendedThemeBuilder]
+  extThemeBuilder:
+    import: 'package:ext_theme_generator/generator.dart'
+    builder_factories: [extThemeBuilder]
     auto_apply: dependents
     build_extensions: {".dart": [".theme.part"]}
     build_to: cache

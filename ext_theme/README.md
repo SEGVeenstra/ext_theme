@@ -13,7 +13,7 @@ and the Flutter guide for
 
 Easily extend the theming in `flutter`. Add custom properties and styles for custom widgets in a heartbeat.
 
-This package contains the annotation for `extended_theme_generator`.
+This package contains the annotation for `ext_theme_generator`.
 
 ## Features
 
@@ -23,11 +23,11 @@ This package contains the annotation `ExtendTheme` which you can use to generate
 
 Start by adding this package as a normal dependency.
 ```yaml
-extended_theme: any
+ext_theme: any
 ```
-and add `extended_theme_generator` as a `dev_dependency`.
+and add `ext_theme_generator` as a `dev_dependency`.
 ```yaml
-extended_theme_generator: any
+ext_theme_generator: any
 ```
 
 ## Usage
@@ -53,7 +53,7 @@ class MyData {
 }
 ```
 
-### Step 2: Generate the extended theme classes
+### Step 2: Generate the ext theme classes
 
 Run `build_runner` to generate your custom theme.
 ```
@@ -65,14 +65,14 @@ flutter pub run build_runner build
 Use your newly generated theme classes to define your themes.
 
 ```dart
-final myLightTheme = ExtendedThemeData(
+final myLightTheme = ExtThemeData(
     data: ThemeData.light(),
-    extendedData: MyData(customColor: Colors.orange),
+    extData: MyData(customColor: Colors.orange),
 );
 
-final myDarkTheme = ExtendedThemeData(
+final myDarkTheme = ExtThemeData(
     data: ThemeData.dark(),
-    extendedData: MyData(customColor: Colors.red),
+    extData: MyData(customColor: Colors.red),
 );
 ```
 
@@ -82,7 +82,7 @@ To be able to access our new theme, we need to add it to the MaterialApp. We wil
 
 ```dart
 return MaterialApp(
-    builder: ExtendedTheme.builder(
+    builder: ExtTheme.builder(
     	light: myLightTheme,
     	dark: myDarkTheme,
     ),
@@ -93,11 +93,11 @@ return MaterialApp(
 
 ```dart
 // grab the current active theme from context.
-final myTheme = ExtendedTheme.of(context);
+final myTheme = ExtTheme.of(context);
 // access ThemeData properties.
 final scaffoldColor = myTheme.data.scaffoldBackgroundColor;
  // access custom properties. 
-final customColor = myTheme.extendedData.customColor;
+final customColor = myTheme.extData.customColor;
 ```
 
 ### Optional: Use custom names
@@ -108,42 +108,42 @@ This way you can make the generated theme feel more app specific.
 
 __widgetName__
 
-Setting `widgetName` tells the generator which name to use for the `Widget` that you add to the _widget tree_ and use to get the `ExtendedThemeData` from context.
+Setting `widgetName` tells the generator which name to use for the `Widget` that you add to the _widget tree_ and use to get the `ExtThemeData` from context.
 ```dart
 @ExtendTheme(widgetName: 'MyTheme')
 
-ExtendedTheme.of(context); // before
+ExtTheme.of(context); // before
 MyTheme.of(context); // after
 ```
 
 __dataClassName__
 
-Setting `dataClassName` tells the generator which name to use instead of `ExtendedThemeData`. This is the class you use to define your themes.
+Setting `dataClassName` tells the generator which name to use instead of `ExtThemeData`. This is the class you use to define your themes.
 ```dart
 @ExtendTheme(dataClassName: 'MyThemeData')
 
-final mylightTheme = ExtendedThemeData(...); // before
+final mylightTheme = ExtThemeData(...); // before
 final mylightTheme = MyThemeData(...); // after
 ```
 
-__extendedDataFieldName__
+__extDataFieldName__
 
-Setting `extendedDataFieldName` tells the generator which name to use for getting your custom data from `ExtendedThemeData`.
+Setting `extDataFieldName` tells the generator which name to use for getting your custom data from `ExtThemeData`.
 ```dart
-@ExtendTheme(extendedDataFieldName: 'custom')
+@ExtendTheme(extDataFieldName: 'custom')
 
-ExtendedTheme.of(context).extendedData.customColor; // before
-ExtendedTheme.of(context).custom.customColor; // after
+ExtTheme.of(context).extData.customColor; // before
+ExtTheme.of(context).custom.customColor; // after
 ```
 
 __dataFieldName__
 
-Setting `dataFieldName` tells the generator which name to use for getting the original data from `ExtendedThemeData`.
+Setting `dataFieldName` tells the generator which name to use for getting the original data from `ExtThemeData`.
 ```dart
 @ExtendTheme(dataFieldName: 'd')
 
-ExtendedTheme.of(context).data.scaffoldBackgroundColor; // before
-ExtendedTheme.of(context).d.scaffoldBackgroundColor; // after
+ExtTheme.of(context).data.scaffoldBackgroundColor; // before
+ExtTheme.of(context).d.scaffoldBackgroundColor; // after
 ```
 
 
