@@ -142,8 +142,8 @@ Setting `dataFieldName` tells the generator which name to use for getting the or
 ```dart
 @ExtTheme(dataFieldName: 'd')
 
-ExtTheme.of(context).data.scaffoldBackgroundColor; // before
-ExtTheme.of(context).d.scaffoldBackgroundColor; // after
+ExtendedTheme.of(context).data.scaffoldBackgroundColor; // before
+ExtendedTheme.of(context).d.scaffoldBackgroundColor; // after
 ```
 
 
