@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
   widgetName: 'MyTheme', // optional, defaults to 'ExtTheme'.
   dataClassName: 'MyThemeData', // optional, defaults to 'ExtThemeData'.
   dataFieldName: 'data', // optional, defaults to 'data'
-  extDataFieldName: 'myData', // optional, defaults to 'extData'.
+  extendedDataFieldName: 'myData', // optional, defaults to 'extData'.
 )
 class MyData {
   final Color myCustomColor;

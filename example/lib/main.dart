@@ -40,16 +40,16 @@ class MyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final extTheme = MyAppTheme.of(context);
+    final appTheme = MyAppTheme.of(context);
     return Scaffold(
       body: Center(
         child: Container(
           width: 200,
           height: 200,
-          color: extTheme.appData.customColor,
+          color: appTheme.appData.customColor,
           child: Text(
             'basic ThemeData usage',
-            style: extTheme.data.textTheme.subtitle2,
+            style: appTheme.data.textTheme.subtitle2,
           ),
         ),
       ),

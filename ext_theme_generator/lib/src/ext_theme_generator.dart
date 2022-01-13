@@ -24,7 +24,7 @@ class ExtThemeGenerator extends GeneratorForAnnotation<ExtTheme> {
     final extThemeClassName =
         annotaton.read(ExtTheme.dataClassNameField).stringValue;
     final extDataFieldName =
-        annotaton.read(ExtTheme.extDataFieldNameField).stringValue;
+        annotaton.read(ExtTheme.extendedDataFieldNameField).stringValue;
     final themeDataFieldName =
         annotaton.read(ExtTheme.dataFieldNameField).stringValue;
 

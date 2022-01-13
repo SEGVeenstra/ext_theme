@@ -6,7 +6,7 @@ part 'my_theme.g.dart';
 @ExtTheme(
   widgetName: 'MyAppTheme',
   dataClassName: 'MyAppThemeData',
-  extDataFieldName: 'appData',
+  extendedDataFieldName: 'appData',
 )
 class AppData {
   final Color customColor;
