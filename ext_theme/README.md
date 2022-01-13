@@ -126,7 +126,7 @@ final mylightTheme = ExtendedThemeData(...); // before
 final mylightTheme = MyThemeData(...); // after
 ```
 
-__extDataFieldName__
+__extendedDataFieldName__
 
 Setting `extendedDataFieldName` tells the generator which name to use for getting your custom data from `ExtendedThemeData`.
 ```dart
