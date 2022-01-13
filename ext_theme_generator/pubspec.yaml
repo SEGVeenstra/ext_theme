@@ -15,7 +15,8 @@ dependencies:
 
   build: ^2.2.1
   source_gen: ^1.2.1
-  ext_theme: 0.0.1-dev.1
+  ext_theme: ^0.0.1-dev.1
+  analyzer: ^3.1.0
 
 # Uncomment when working locally
 # dependency_overrides:
