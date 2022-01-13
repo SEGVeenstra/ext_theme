@@ -169,17 +169,17 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.1"
-  extended_theme:
+  ext_theme:
     dependency: "direct main"
     description:
-      path: "../extended_theme"
+      path: "../ext_theme"
       relative: true
     source: path
-    version: "0.0.1"
-  extended_theme_generator:
+    version: "0.0.1-dev.1"
+  ext_theme_generator:
     dependency: "direct dev"
     description:
-      path: "../extended_theme_generator"
+      path: "../ext_theme_generator"
       relative: true
     source: path
     version: "0.0.1"

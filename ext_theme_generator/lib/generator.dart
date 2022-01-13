@@ -3,9 +3,9 @@ library extended_theme_generator;
 import 'package:build/build.dart';
 import 'package:source_gen/source_gen.dart';
 
-import 'src/extended_theme_generator.dart';
+import 'src/ext_theme_generator.dart';
 
-Builder extendedThemeBuilder(BuilderOptions options) => SharedPartBuilder(
+Builder extThemeBuilder(BuilderOptions options) => SharedPartBuilder(
       [ExtThemeGenerator()],
       'theme',
     );

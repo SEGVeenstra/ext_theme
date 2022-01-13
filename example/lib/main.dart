@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'ExtendedTheme Demo',
+      title: 'extTheme Demo',
       builder: MyAppTheme.builder(
         light: myTheme,
         dark: myDarkTheme,
@@ -40,16 +40,16 @@ class MyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final extendedTheme = MyAppTheme.of(context);
+    final extTheme = MyAppTheme.of(context);
     return Scaffold(
       body: Center(
         child: Container(
           width: 200,
           height: 200,
-          color: extendedTheme.appData.customColor,
+          color: extTheme.appData.customColor,
           child: Text(
             'basic ThemeData usage',
-            style: extendedTheme.data.textTheme.subtitle2,
+            style: extTheme.data.textTheme.subtitle2,
           ),
         ),
       ),

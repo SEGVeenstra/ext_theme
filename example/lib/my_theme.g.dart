@@ -3,7 +3,7 @@
 part of 'my_theme.dart';
 
 // **************************************************************************
-// ExtendedThemeGenerator
+// ExtThemeGenerator
 // **************************************************************************
 
 class MyAppTheme extends StatelessWidget {

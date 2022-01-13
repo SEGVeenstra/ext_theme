@@ -1,12 +1,12 @@
-import 'package:extended_theme/extended_theme.dart';
+import 'package:ext_theme/ext_theme.dart';
 import 'package:flutter/material.dart';
 
 part 'my_theme.g.dart';
 
-@ExtendTheme(
+@ExtTheme(
   widgetName: 'MyAppTheme',
   dataClassName: 'MyAppThemeData',
-  extendedDataFieldName: 'appData',
+  extDataFieldName: 'appData',
 )
 class AppData {
   final Color customColor;
