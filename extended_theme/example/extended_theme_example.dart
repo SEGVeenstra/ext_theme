@@ -1,0 +1,38 @@
+import 'package:extended_theme/extended_theme.dart';
+import 'package:flutter/material.dart';
+
+/// This `part` is required! (uncommented)
+// part 'extended_theme_example.g.dart';
+
+/// Create a class with the properties you want in your theme and
+/// annotate it with `@ExtendTheme()`.
+///
+/// This can add any property you want so you can also create
+/// style-objects for your custom widgets.
+@ExtendTheme(
+  widgetName: 'MyTheme', // optional, defaults to 'ExtendedTheme'.
+  dataClassName: 'MyThemeData', // optional, defaults to 'ExtendedThemeData'.
+  dataFieldName: 'data', // optional, defaults to 'data'
+  extendedDataFieldName: 'myData', // optional, defaults to 'extendedData'.
+)
+class MyData {
+  final Color myCustomColor;
+  final CustomWidgetData customWidget;
+
+  MyData({
+    required this.myCustomColor,
+    required this.customWidget,
+  });
+}
+
+class CustomWidgetData {
+  final Color backgroundColor;
+  final int width;
+  final int height;
+
+  CustomWidgetData({
+    required this.backgroundColor,
+    required this.width,
+    required this.height,
+  });
+}

@@ -39,7 +39,7 @@ Your custom theme will be up and running in no time, just follow these steps.
 Create a file for your custom theme(data).
 For example: `my_theme.dart`.
 
-Create the class which will hold your custom properties and annotate it with `@ExtendTheme`.
+Create the class which will hold your custom properties and annotate it with `@ExtendTheme()`.
 Also don't forget to add the `part` section, or else the generator can't generate the theme.
 
 ```dart
@@ -65,12 +65,12 @@ flutter pub run build_runner build
 Use your newly generated theme classes to define your themes.
 
 ```dart
-final myLightTheme = ExtenededThemeData(
+final myLightTheme = ExtendedThemeData(
     data: ThemeData.light(),
     extendedData: MyData(customColor: Colors.orange),
 );
 
-final myDarkTheme = ExtenededThemeData(
+final myDarkTheme = ExtendedThemeData(
     data: ThemeData.dark(),
     extendedData: MyData(customColor: Colors.red),
 );
@@ -102,7 +102,7 @@ final customColor = myTheme.extendedData.customColor;
 
 ### Optional: Use custom names
 
-You can choose to define your own names for the classes that this package will generate by overriding them in the annotation.
+You can choose to define your own names for the classes that this package will generate by overriding them in the `@ExtendTheme()` annotation.
 
 This way you can make the generated theme feel more app specific.
 
