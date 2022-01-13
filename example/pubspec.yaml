@@ -11,8 +11,7 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
-  ext_theme:
-    path: ../ext_theme
+  ext_theme: 0.0.1-dev.1
 
 dev_dependencies:
   flutter_test:
@@ -21,14 +20,14 @@ dev_dependencies:
   flutter_lints: ^1.0.0
   build_runner: ^2.1.7
 
-  ext_theme_generator:
-    path: ../ext_theme_generator
+  ext_theme_generator: 0.0.1-dev1
 
-dependency_overrides:
-  ext_theme_generator:
-    path: ../ext_theme_generator
-  ext_theme:
-    path: ../ext_theme
+# uncomment when working locally
+# dependency_overrides:
+#   ext_theme_generator:
+#     path: ../ext_theme_generator
+#   ext_theme:
+#     path: ../ext_theme
 
 flutter:
   uses-material-design: true

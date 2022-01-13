@@ -172,9 +172,9 @@ packages:
   ext_theme:
     dependency: "direct main"
     description:
-      path: "../ext_theme"
-      relative: true
-    source: path
+      name: ext_theme
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.0.1-dev.1"
   ext_theme_generator:
     dependency: "direct dev"
@@ -182,7 +182,7 @@ packages:
       path: "../ext_theme_generator"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.0.1-dev.1"
   fake_async:
     dependency: transitive
     description:

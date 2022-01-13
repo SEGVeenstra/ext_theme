@@ -1,8 +1,9 @@
 name: ext_theme_generator
 description: Generator for ext_theme.
-version: 0.0.1
-publish_to: none
-homepage:
+version: 0.0.1-dev.1
+homepage: 
+repository: https://github.com/SEGVeenstra/ext_theme
+issue_tracker: https://github.com/SEGVeenstra/ext_theme/issues
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -14,14 +15,12 @@ dependencies:
 
   build: ^2.2.1
   source_gen: ^1.2.1
-  ext_theme:
-    git:
-      url: git@github.com:SEGVeenstra/ext_theme.git
-      path: ext_theme
+  ext_theme: 0.0.1-dev.1
 
-dependency_overrides:
-  ext_theme:
-    path: ../ext_theme
+# Uncomment when working locally
+# dependency_overrides:
+#   ext_theme:
+#     path: ../ext_theme
 
 dev_dependencies:
   flutter_test:
