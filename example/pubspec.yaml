@@ -23,11 +23,11 @@ dev_dependencies:
   ext_theme_generator: 0.0.1-dev.2
 
 # uncomment when working locally
-# dependency_overrides:
-#   ext_theme_generator:
-#     path: ../ext_theme_generator
-#   ext_theme:
-#     path: ../ext_theme
+dependency_overrides:
+  ext_theme_generator:
+    path: ../ext_theme_generator
+  ext_theme:
+    path: ../ext_theme
 
 flutter:
   uses-material-design: true
