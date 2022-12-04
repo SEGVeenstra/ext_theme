@@ -11,7 +11,7 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
-  ext_theme: 1.0.0
+  ext_theme: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -20,7 +20,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   build_runner: ^2.3.1
 
-  ext_theme_generator: 1.0.0
+  ext_theme_generator: ^1.0.0
 
 # uncomment when working locally
 dependency_overrides:

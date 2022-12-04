@@ -1,6 +1,6 @@
 name: ext_theme_generator
 description: Generator for ext_theme.
-version: 0.0.1-dev.2
+version: 1.0.0+1
 homepage: 
 repository: https://github.com/SEGVeenstra/ext_theme
 issue_tracker: https://github.com/SEGVeenstra/ext_theme/issues
@@ -25,9 +25,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
-
-  
+  flutter_lints: ^2.0.0
 
 flutter:
 
