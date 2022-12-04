@@ -6,17 +6,16 @@ repository: https://github.com/SEGVeenstra/ext_theme
 issue_tracker: https://github.com/SEGVeenstra/ext_theme/issues
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: '>=2.18.5 <3.0.0'
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
-
-  build: ^2.2.1
-  source_gen: ^1.2.1
-  ext_theme: ^0.0.1-dev.2
-  analyzer: ^3.1.0
+  build: ^2.3.1
+  source_gen: ^1.2.6
+  ext_theme: ^1.0.0
+  analyzer: ^5.2.0
 
 # Uncomment when working locally
 # dependency_overrides:

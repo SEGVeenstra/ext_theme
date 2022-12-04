@@ -2,14 +2,12 @@ name: ext_theme
 description: >- 
   Easily extend the theming in Flutter with your custom properties.
   To be used with 'ext_theme_generator'.
-version: 0.0.1-dev.2
+version: 1.0.0+1
 homepage: 
 repository: https://github.com/SEGVeenstra/ext_theme
 issue_tracker: https://github.com/SEGVeenstra/ext_theme/issues
-
 environment:
-  sdk: ">=2.12.0 <3.0.0"
-  flutter: ">=1.17.0"
+  sdk: '>=2.18.5 <3.0.0'
 
 dependencies:
   flutter:
@@ -18,5 +16,5 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
+  flutter_lints: ^2.0.0
 flutter:
